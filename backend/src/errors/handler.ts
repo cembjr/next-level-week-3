@@ -17,6 +17,8 @@ const errorHandler = (
       errors[err.path] = err.errors;
     });
 
+    console.log({ message: "Validation fails", errors });
+    
     return response.status(400).json({ message: "Validation fails", errors });
   }
 

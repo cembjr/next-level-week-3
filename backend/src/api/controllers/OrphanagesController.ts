@@ -27,6 +27,7 @@ export default {
 
   async create(request: Request, response: Response): Promise<Response> {
     const _repository = getRepository(Orphanage);
+    console.log(request.body);
 
     const {
       name,
@@ -40,7 +41,7 @@ export default {
 
     const requestImages = request.files as Express.Multer.File[];
 
-    const images = requestImages.map((image) => {
+    const images = requestImages?.map((image) => {
       return { path: image.filename };
     });
 
@@ -51,7 +52,7 @@ export default {
       about,
       instructions,
       opening_hours,
-      open_on_weekends,
+      open_on_weekends: open_on_weekends === 'true',
       images,
     };
 
@@ -75,8 +76,6 @@ export default {
     });
 
     const orphanage = _repository.create(data);
-
-    console.log(orphanage);
 
     await _repository.save(orphanage);
 

@@ -11,6 +11,6 @@ const routeOrphanages = Router();
 
 routeOrphanages.get("/", OrphanagesController.list);
 routeOrphanages.get("/:id", OrphanagesController.show);
-routeOrphanages.post("/", upload.array('images'), OrphanagesController.create);
+routeOrphanages.post("/", upload.array('images', 10), OrphanagesController.create);
 
 export default routeOrphanages;
